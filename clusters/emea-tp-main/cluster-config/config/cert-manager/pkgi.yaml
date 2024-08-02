@@ -4,7 +4,7 @@ metadata:
   name: cert-manager
   namespace: tp-install
 spec:
-  serviceAccountName: default-ns-sa
+  serviceAccountName: tp-installer-sa
   packageRef:
     refName: cert-manager.timosalm.de
     versionSelection:
