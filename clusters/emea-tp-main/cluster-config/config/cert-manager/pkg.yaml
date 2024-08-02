@@ -15,6 +15,7 @@ spec:
           repository:
             url: oci://registry-1.docker.io/bitnamicharts
       template:
-      - helmTemplate: {}
+      - helmTemplate:
+          namespace: cert-manager
       deploy:
       - kapp: {}
