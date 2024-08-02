@@ -5,7 +5,7 @@ metadata:
   namespace: default
 spec:
   refName: cert-manager.timosalm.de
-  version: 1.0.0
+  version: "1.0.0"
   template:
     spec:
       fetch:
