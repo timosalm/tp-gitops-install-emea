@@ -15,6 +15,6 @@ kapp deploy -a sg -f https://github.com/carvel-dev/secretgen-controller/releases
 
 ## Deploy "emea-tp-main" cluster sync
 ```
-(cd clusters/emea-tp-main && ytt -f sync/config --data-values-file sync/values.yaml | kapp deploy -a sync -f -)
+(cd clusters/emea-tp-main && ytt -f sync/config --data-values-file sync/values.yaml | kapp deploy -a sync -y -f -)
 ```
 

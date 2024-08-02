@@ -1,0 +1,11 @@
+apiVersion: packaging.carvel.dev/v1alpha1
+kind: PackageInstall
+metadata:
+  name: cert-manager
+  namespace: tp-install
+spec:
+  serviceAccountName: default-ns-sa
+  packageRef:
+    refName: cert-manager.timosalm.de
+    versionSelection:
+      constraints: '>0.0.0'

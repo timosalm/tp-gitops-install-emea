@@ -1,0 +1,20 @@
+apiVersion: data.packaging.carvel.dev/v1alpha1
+kind: Package
+metadata:
+  name: cert-manager.timosalm.de.1.0.0
+  namespace: default
+spec:
+  refName: cert-manager.timosalm.de
+  version: 1.0.0
+  template:
+    spec:
+      fetch:
+      - helmChart:
+          name: cert-manager
+          version: 1.15.2
+          repository:
+            url: https://registry-1.docker.io/bitnamicharts
+      template:
+      - helmTemplate: {}
+      deploy:
+      - kapp: {}
