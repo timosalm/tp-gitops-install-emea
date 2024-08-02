@@ -2,7 +2,7 @@ apiVersion: data.packaging.carvel.dev/v1alpha1
 kind: Package
 metadata:
   name: cert-manager.timosalm.de.1.0.0
-  namespace: default
+  namespace: tp-install
 spec:
   refName: cert-manager.timosalm.de
   version: "1.0.0"

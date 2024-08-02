@@ -8,4 +8,4 @@ spec:
   packageRef:
     refName: cert-manager.timosalm.de
     versionSelection:
-      constraints: '1.0.0'
+      constraints: '>=0.0.0'
