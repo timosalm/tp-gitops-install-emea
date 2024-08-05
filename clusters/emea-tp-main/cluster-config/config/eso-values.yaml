@@ -4,13 +4,13 @@ apiVersion: external-secrets.io/v1beta1
 kind: ExternalSecret
 metadata:
   name: harbor-sensitive-values
-  namespace: harbor
+  namespace: tp-install
   annotations:
     kapp.k14s.io/change-group: eso/secretstore-secret
     kapp.k14s.io/change-rule.0: "upsert after upserting eso/secretstore"
 spec:
   secretStoreRef:
-    name: harbor-secrets
+    name: tp-install-secrets
     kind: SecretStore
   refreshInterval: "1m"
   data:

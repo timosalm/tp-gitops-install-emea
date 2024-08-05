@@ -3,8 +3,8 @@
 apiVersion: external-secrets.io/v1beta1
 kind: SecretStore
 metadata:
-  name: harbor-secrets
-  namespace: harbor
+  name: tp-install-secrets
+  namespace: tp-install
   annotations:
     kapp.k14s.io/change-group: eso/secretstore
 spec:
@@ -15,12 +15,12 @@ spec:
       auth:
         jwt:
           serviceAccountRef:
-            name: harbor-secrets
+            name: tp-install-secrets
 ---
 apiVersion: v1
 kind: ServiceAccount
 metadata:
   annotations:
     eks.amazonaws.com/role-arn: #@ data.values.aws.secrets_manager.role_arn
-  name: harbor-secrets
-  namespace: harbor
+  name: tp-install-secrets
+  namespace: tp-install
