@@ -1,0 +1,21 @@
+apiVersion: data.packaging.carvel.dev/v1alpha1
+kind: Package
+metadata:
+  name: external-secrets-operator.timosalm.de.1.0.0
+  namespace: tp-install
+spec:
+  refName: external-secrets-operator.timosalm.de
+  version: "1.0.0"
+  template:
+    spec:
+      fetch:
+      - helmChart:
+          name: external-secrets
+          version: 0.10.0
+          repository:
+            url: https://charts.external-secrets.io
+      template:
+      - helmTemplate:
+          namespace: external-secrets-operator
+      deploy:
+      - kapp: {}
