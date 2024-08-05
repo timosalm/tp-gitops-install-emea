@@ -5,6 +5,8 @@ kind: ExternalSecret
 metadata:
   name: harbor-sensitive-values
   namespace: harbor
+  annotations:
+    kapp.k14s.io/change-rule.0: "upsert after upserting eso/secretstore"
 spec:
   secretStoreRef:
     name: harbor-secrets
