@@ -1,0 +1,21 @@
+apiVersion: data.packaging.carvel.dev/v1alpha1
+kind: Package
+metadata:
+  name: external-dns.timosalm.de.1.0.0
+  namespace: tp-install
+spec:
+  refName: external-dns.timosalm.de
+  version: "1.0.0"
+  template:
+    spec:
+      fetch:
+      - helmChart:
+          name: external-dns
+          version: 8.3.3
+          repository:
+            url: oci://registry-1.docker.io/bitnamicharts
+      template:
+      - helmTemplate:
+          namespace: external-dns
+      deploy:
+      - kapp: {}

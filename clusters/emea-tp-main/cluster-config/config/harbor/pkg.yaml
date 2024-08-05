@@ -1,0 +1,21 @@
+apiVersion: data.packaging.carvel.dev/v1alpha1
+kind: Package
+metadata:
+  name: harbor.timosalm.de.1.0.0
+  namespace: tp-install
+spec:
+  refName: harbor.timosalm.de
+  version: "1.0.0"
+  template:
+    spec:
+      fetch:
+      - helmChart:
+          name: harbor
+          version: 22.0.10
+          repository:
+            url: oci://registry-1.docker.io/bitnamicharts
+      template:
+      - helmTemplate:
+          namespace: harbor
+      deploy:
+      - kapp: {}

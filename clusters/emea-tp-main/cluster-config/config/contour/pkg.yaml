@@ -1,0 +1,21 @@
+apiVersion: data.packaging.carvel.dev/v1alpha1
+kind: Package
+metadata:
+  name: contour.timosalm.de.1.0.0
+  namespace: tp-install
+spec:
+  refName: contour.timosalm.de
+  version: "1.0.0"
+  template:
+    spec:
+      fetch:
+      - helmChart:
+          name: contour
+          version: 18.2.11
+          repository:
+            url: oci://registry-1.docker.io/bitnamicharts
+      template:
+      - helmTemplate:
+          namespace: contour
+      deploy:
+      - kapp: {}

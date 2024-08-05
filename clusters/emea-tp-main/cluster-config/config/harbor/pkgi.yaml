@@ -1,0 +1,11 @@
+apiVersion: packaging.carvel.dev/v1alpha1
+kind: PackageInstall
+metadata:
+  name: harbor
+  namespace: tp-install
+spec:
+  serviceAccountName: tp-installer-sa
+  packageRef:
+    refName: harbor.timosalm.de
+    versionSelection:
+      constraints: '>=0.0.0'
