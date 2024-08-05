@@ -4,7 +4,7 @@ metadata:
   name: harbor
   namespace: tp-install
   annotations:
-    kapp.k14s.io/change-rule.0: "upsert after upserting eso/secretstore/secret/harbor"
+    kapp.k14s.io/change-rule.0: "upsert after upserting eso/secretstore-secret"
 spec:
   serviceAccountName: tp-installer-sa
   packageRef:
