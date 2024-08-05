@@ -1,0 +1,26 @@
+#@ load("@ytt:data", "data")
+---
+apiVersion: external-secrets.io/v1beta1
+kind: SecretStore
+metadata:
+  name: harbor-secrets
+  namespace: harbor
+  annotations:
+    kapp.k14s.io/change-group: eso/secretstore
+spec:
+  provider:
+    aws:
+      service: SecretsManager
+      region: #@ aws.region
+      auth:
+        jwt:
+          serviceAccountRef:
+            name: harbor-secrets
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  annotations:
+    eks.amazonaws.com/role-arn: #@ data.values.aws.secrets_manager.role_arn
+  name: harbor-secrets
+  namespace: harbor

@@ -1,0 +1,17 @@
+#@ load("@ytt:data", "data")
+---
+apiVersion: external-secrets.io/v1beta1
+kind: ExternalSecret
+metadata:
+  name: harbor-sensitive-values
+  namespace: harbor
+  annotations:
+    kapp.k14s.io/change-rule.0: "upsert after upserting eso/secretstore"
+spec:
+  secretStoreRef:
+    name: harbor-secrets
+    kind: SecretStore
+  refreshInterval: "1m"
+  data:
+    - secretKey: sensitive-harbor-values.yaml
+      remoteRef: #@ data.values.aws.secrets_manager.remote_refs.harbor

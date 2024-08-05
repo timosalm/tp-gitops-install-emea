@@ -9,3 +9,6 @@ spec:
     refName: harbor.timosalm.de
     versionSelection:
       constraints: '>=0.0.0'
+  values:
+  - secretRef:
+      name: harbor-sensitive-values
