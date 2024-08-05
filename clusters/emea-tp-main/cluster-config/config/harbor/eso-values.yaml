@@ -12,4 +12,5 @@ spec:
   refreshInterval: "1m"
   data:
     - secretKey: sensitive-harbor-values.yaml
-      remoteRef: dev/emea-tp-main/harbor
+      remoteRef:
+        key: #@ data.values.aws.secrets_manager.remote_refs.harbor
