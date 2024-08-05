@@ -5,8 +5,6 @@ kind: SecretStore
 metadata:
   name: harbor-secrets
   namespace: harbor
-  annotations:
-    kapp.k14s.io/change-group: eso/secretstore
 spec:
   provider:
     aws:
