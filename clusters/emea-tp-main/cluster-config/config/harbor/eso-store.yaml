@@ -11,7 +11,7 @@ spec:
   provider:
     aws:
       service: SecretsManager
-      region: #@ aws.region
+      region: #@ data.values.aws.region
       auth:
         jwt:
           serviceAccountRef:
