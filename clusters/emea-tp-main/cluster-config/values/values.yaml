@@ -3,4 +3,4 @@ aws:
   secrets_manager:
       role_arn: arn:aws:iam::377668981663:role/emea-tp-main-secret-reader
       remote_refs:
-        harbor: dev/emea-tp-main/harbor
+        harbor: "dev/emea-tp-main/harbor"
