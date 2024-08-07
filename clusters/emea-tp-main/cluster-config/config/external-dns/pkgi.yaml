@@ -9,3 +9,6 @@ spec:
     refName: external-dns.timosalm.de
     versionSelection:
       constraints: '>=0.0.0'
+  values:
+  - secretRef:
+      name: external-dns-values

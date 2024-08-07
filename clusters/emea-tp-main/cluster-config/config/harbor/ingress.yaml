@@ -1,0 +1,45 @@
+#@ load("@ytt:data", "data")
+---
+apiVersion: projectcontour.io/v1
+kind: HTTPProxy
+metadata:
+  annotations:
+    projectcontour.io/response-timeout: 900s
+  name: harbor
+  namespace: harbor
+spec:
+  routes:
+  - conditions:
+    - prefix: /
+    services:
+    - name: harbor-portal
+      port: 443
+  - conditions:
+    - prefix: /api/
+    services:
+    - name: harbor-core
+      port: 443
+  - conditions:
+    - prefix: /service/
+    services:
+    - name: harbor-core
+      port: 443
+  - conditions:
+    - prefix: /v2/
+    services:
+    - name: harbor-core
+      port: 443
+  - conditions:
+    - prefix: /chartrepo/
+    services:
+    - name: harbor-core
+      port: 443
+  - conditions:
+    - prefix: /c/
+    services:
+    - name: harbor-core
+      port: 443
+  virtualhost:
+    fqdn: #@ "harbor.{}".format(data.values.common.ingress_domain)
+    tls:
+      secretName: cert-manager/tls-cert
