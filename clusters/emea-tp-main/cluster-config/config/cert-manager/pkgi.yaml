@@ -3,6 +3,8 @@ kind: PackageInstall
 metadata:
   name: cert-manager
   namespace: tp-install
+  annotations: 
+    kapp.k14s.io/change-group: cert-manager
 spec:
   serviceAccountName: tp-installer-sa
   packageRef:

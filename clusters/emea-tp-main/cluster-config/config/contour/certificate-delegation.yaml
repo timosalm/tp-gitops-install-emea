@@ -1,0 +1,15 @@
+apiVersion: projectcontour.io/v1
+kind: TLSCertificateDelegation
+metadata:
+  name: contour-delegation
+  namespace: cert-manager
+  annotations:
+    kapp.k14s.io/change-rule.0: "upsert after upserting contour"
+    kapp.k14s.io/change-rule.1: "upsert after upserting cert-manager"
+    kapp.k14s.io/change-rule.2: "delete before deleting cert-manager"
+    kapp.k14s.io/change-rule.3: "delete before deleting contour"
+spec:
+  delegations:
+    - secretName: tls-cert
+      targetNamespaces:
+        - "*"

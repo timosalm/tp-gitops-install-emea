@@ -13,4 +13,6 @@ spec:
       constraints: '>=0.0.0'
   values:
   - secretRef:
+      name: harbor-values
+  - secretRef:
       name: harbor-sensitive-values

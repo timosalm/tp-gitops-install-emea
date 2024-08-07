@@ -1,6 +1,13 @@
+common:
+  ingress_domain: main.emea.end2end.link
 aws:
   region: eu-central-1
   secrets_manager:
     role_arn: arn:aws:iam::377668981663:role/emea-tp-main-secret-reader
     remote_refs:
       harbor: dev/emea-tp-main/harbor
+  dns:
+    hosted_zone_id: Z04147751VKC48IKUQS06
+    role: arn:aws:iam::377668981663:role/EmeaE2EDemoHostedZoneChanger
+harbor: 
+  url: https://harbor.main.emea.end2end.link
