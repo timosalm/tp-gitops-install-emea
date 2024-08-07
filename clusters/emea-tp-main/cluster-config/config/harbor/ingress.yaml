@@ -13,32 +13,32 @@ spec:
     - prefix: /
     services:
     - name: harbor-portal
-      port: 443
+      port: 80
   - conditions:
     - prefix: /api/
     services:
     - name: harbor-core
-      port: 443
+      port: 80
   - conditions:
     - prefix: /service/
     services:
     - name: harbor-core
-      port: 443
+      port: 80
   - conditions:
     - prefix: /v2/
     services:
     - name: harbor-core
-      port: 443
+      port: 80
   - conditions:
     - prefix: /chartrepo/
     services:
     - name: harbor-core
-      port: 443
+      port: 80
   - conditions:
     - prefix: /c/
     services:
     - name: harbor-core
-      port: 443
+      port: 80
   virtualhost:
     fqdn: #@ "harbor.{}".format(data.values.common.ingress_domain)
     tls:
