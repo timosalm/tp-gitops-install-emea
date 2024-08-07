@@ -11,3 +11,6 @@ spec:
     refName: cert-manager.timosalm.de
     versionSelection:
       constraints: '>=0.0.0'
+  values:
+  - secretRef:
+      name: cert-manager-values
