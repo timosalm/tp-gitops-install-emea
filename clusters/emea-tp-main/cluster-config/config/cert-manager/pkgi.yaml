@@ -14,3 +14,34 @@ spec:
   values:
   - secretRef:
       name: cert-manager-values
+#! Stub-out CRDs until it is created by cert-manager package
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: certificates.cert-manager.io
+  annotations:
+    kapp.k14s.io/exists: ""
+    kapp.k14s.io/change-rule.0: "upsert after upserting cert-manager"
+spec:
+  group: cert-manager.io
+  names:
+    kind: Certificate
+  versions:
+    - name: v1
+  scope: Namespaced
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: clusterissuers.cert-manager.io
+  annotations:
+    kapp.k14s.io/exists: ""
+    kapp.k14s.io/change-rule.0: "upsert after upserting cert-manager"
+spec:
+  group: cert-manager.io
+  names:
+    kind: ClusterIssuer
+  versions:
+    - name: v1
+  scope: Cluster
