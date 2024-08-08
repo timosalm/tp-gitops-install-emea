@@ -1,3 +1,7 @@
+git:
+  url: https://github.com/timosalm/tp-gitops-install-emea.git
+  ref: origin/main
+  sub_path: clusters/emea-tp-main/cluster-config
 common:
   ingress:
     domain: main.emea.end2end.link
