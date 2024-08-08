@@ -1,7 +1,7 @@
 apiVersion: training.educates.dev/v1beta1
 kind: TrainingPortal
 metadata:
-  name: training-portal
+  name: workshops
 spec:
   portal:
     password: hello-tanzu1!
