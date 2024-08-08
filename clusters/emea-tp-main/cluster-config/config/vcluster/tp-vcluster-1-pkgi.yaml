@@ -1,0 +1,17 @@
+apiVersion: packaging.carvel.dev/v1alpha1
+kind: PackageInstall
+metadata:
+  name: tp-vcluster-1
+  namespace: tp-install
+  annotations: 
+    ext.packaging.carvel.dev/helm-template-name: tp-vcluster-1
+    ext.packaging.carvel.dev/helm-template-namespace: tp-vcluster-1
+spec:
+  serviceAccountName: tp-installer-sa
+  packageRef:
+    refName: vcluster.timosalm.de
+    versionSelection:
+      constraints: '>=0.0.0'
+  values:
+  - secretRef:
+      name: tp-vcluster-1-values

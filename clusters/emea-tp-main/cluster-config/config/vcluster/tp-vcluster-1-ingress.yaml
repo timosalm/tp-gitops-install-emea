@@ -1,0 +1,16 @@
+#@ load("@ytt:data", "data")
+---
+apiVersion: projectcontour.io/v1
+kind: HTTPProxy
+metadata:
+  name: tp-vcluster-1
+  namespace: tp-vcluster-1
+spec:
+  virtualhost:
+    fqdn: #@ "tp-vcluster-1.{}".format(data.values.common.ingress.domain)
+    tls:
+      passthrough: true
+  tcpproxy:
+    services:
+    - name: tp-vcluster-1
+      port: 443
