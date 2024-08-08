@@ -1,0 +1,24 @@
+#@ load("@ytt:data", "data")
+---
+apiVersion: kappctrl.k14s.io/v1alpha1
+kind: App
+metadata:
+  name: educates-workshops-sync
+  namespace: tp-install
+spec:
+  serviceAccountName: tp-installer-sa
+  fetch:
+    - git:
+        url: #@ data.values.git.url
+        ref: #@ data.values.git.ref
+        subPath: #@ data.values.git.sub_path
+  template:
+    - ytt:
+        paths: 
+        - config/educates/workshops
+        valuesFrom:
+        - path: values
+        - secretRef:
+            name: workshops-sensitive-values
+  deploy:
+    - kapp: {}
