@@ -3,15 +3,15 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: contour-tls-delegation-cert
-  namespace: cert-manager
+  name: ingress-cert
+  namespace: #@ data.values.common.ingress.certificate.namespace
   annotations:
     kapp.k14s.io/change-rule.0: "upsert after upserting cert-manager"
     kapp.k14s.io/change-rule.1: "delete before deleting cert-manager"
 spec:
-  commonName: #@ "*.{}".format(data.values.common.ingress_domain)
+  commonName: #@ "*.{}".format(data.values.common.ingress.domain)
   dnsNames:
-  - #@ "*.{}".format(data.values.common.ingress_domain)
+  - #@ "*.{}".format(data.values.common.ingress.domain)
   duration: 2160h0m0s
   issuerRef:
     kind: ClusterIssuer
@@ -22,6 +22,6 @@ spec:
     size: 2048
   subject:
     organizations:
-    - vmware
+    - broadcom
   renewBefore: 360h0m0s
-  secretName: tls-cert
+  secretName: #@ data.values.common.ingress.certificate.name

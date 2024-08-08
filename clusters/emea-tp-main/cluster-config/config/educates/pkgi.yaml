@@ -1,0 +1,16 @@
+#@ load("@ytt:data", "data")
+---
+apiVersion: packaging.carvel.dev/v1alpha1
+kind: PackageInstall
+metadata:
+  name: educates
+  namespace: tp-install
+spec:
+  packageRef:
+    refName: training-platform.educates.dev
+    versionSelection:
+      constraints: #@ data.values.educates.version
+  serviceAccountName: tp-installer-sa
+  values:
+  - secretRef:
+      name: educates-values

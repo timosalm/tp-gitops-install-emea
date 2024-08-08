@@ -1,5 +1,9 @@
 common:
-  ingress_domain: main.emea.end2end.link
+  ingress:
+    domain: main.emea.end2end.link
+    certificate:
+      name: tls-cert
+      namespace: cert-manager 
 aws:
   region: eu-central-1
   secrets_manager:
@@ -11,3 +15,5 @@ aws:
     role: arn:aws:iam::377668981663:role/EmeaE2EDemoHostedZoneChanger
 harbor: 
   url: https://harbor.main.emea.end2end.link
+educates:
+  version: 2.7.2

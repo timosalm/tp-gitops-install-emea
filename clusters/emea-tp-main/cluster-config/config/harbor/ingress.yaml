@@ -40,6 +40,6 @@ spec:
     - name: harbor-core
       port: 80
   virtualhost:
-    fqdn: #@ "harbor.{}".format(data.values.common.ingress_domain)
+    fqdn: #@ "harbor.{}".format(data.values.common.ingress.domain)
     tls:
-      secretName: cert-manager/tls-cert
+      secretName: #@ "{}/{}".format(data.values.common.ingress.certificate.namespace, data.values.common.ingress.certificate.name)
