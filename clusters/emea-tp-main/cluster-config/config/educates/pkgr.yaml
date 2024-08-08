@@ -5,6 +5,8 @@ kind: PackageRepository
 metadata:
   name: educates
   namespace: tp-install
+  annotations:
+    kapp.k14s.io/change-group: pkgr
 spec:
   fetch:
     imgpkgBundle:

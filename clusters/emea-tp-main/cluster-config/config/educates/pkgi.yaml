@@ -5,6 +5,9 @@ kind: PackageInstall
 metadata:
   name: educates
   namespace: tp-install
+  annotations:
+    kapp.k14s.io/change-rule.0: "upsert after upserting pkgr"
+    kapp.k14s.io/change-rule.1: "delete before deleting pkgr"
 spec:
   packageRef:
     refName: training-platform.educates.dev
