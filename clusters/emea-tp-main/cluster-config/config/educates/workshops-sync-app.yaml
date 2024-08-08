@@ -15,7 +15,7 @@ spec:
   template:
     - ytt:
         paths: 
-        - config/educates/workshops
+        - educates-workshops
         valuesFrom:
         - path: values
         - secretRef:
