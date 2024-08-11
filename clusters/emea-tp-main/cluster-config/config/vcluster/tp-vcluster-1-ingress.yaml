@@ -9,7 +9,7 @@ spec:
   virtualhost:
     fqdn: #@ "tp-vcluster-1.{}".format(data.values.common.ingress.domain)
     tls:
-      secretName: #@ "{}/{}".format(data.values.common.ingress.certificate.namespace, data.values.common.ingress.certificate.name)
+      passthrough: true
   tcpproxy:
     services:
     - name: tp-vcluster-1
