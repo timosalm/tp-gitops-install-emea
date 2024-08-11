@@ -26,9 +26,9 @@ spec:
     - name: PUBLIC_REGISTRY_HOST
       value: public-registry-$(session_name).$(ingress_domain)
     - name: TANZU_CLI_CLOUD_SERVICES_ORGANIZATION_ID
-      value: #@ data.values.tap_saas.org
+      value: #@ data.values.tp_k8s.org
     - name: TANZU_PLATFORM_PROJECT
-      value: #@ data.values.tap_saas.project
+      value: #@ data.values.tp_k8s.project
     ingresses:
     - host: sample-app.$(session_namespace)
       name: sample-app

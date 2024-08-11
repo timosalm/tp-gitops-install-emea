@@ -91,15 +91,15 @@ spec:
     - name: PUBLIC_REGISTRY_HOST
       value: public-registry-$(session_name).$(ingress_domain)
     - name: TANZU_CLI_CLOUD_SERVICES_ORGANIZATION_ID
-      value: #@ data.values.tap_saas.org
+      value: #@ data.values.tp_k8s.org
     - name: TANZU_PLATFORM_PROJECT
-      value: #@ data.values.tap_saas.project
+      value: #@ data.values.tp_k8s.project
     - name: TANZU_PLATFORM_PROFILES
-      value: #@ data.values.tap_saas.profiles
+      value: #@ data.values.tp_k8s.profiles
     - name: TANZU_PLATFORM_AVAILABILITY_TARGETS
-      value: #@ data.values.tap_saas.availability_target
+      value: #@ data.values.tp_k8s.availability_target
     - name: TANZU_CLI_SPACE_CREATE_TOKEN
-      value: #@ data.values.sensitive.tap_saas.space_create_token
+      value: #@ data.values.sensitive.tp_k8s.space_create_token
     - name: DB_PASSWORD
       value: #@ data.values.sensitive.workshops.tp_devx.db_password
     ingresses:
