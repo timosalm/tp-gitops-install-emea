@@ -22,18 +22,10 @@ kapp deploy -a sg -f https://github.com/carvel-dev/secretgen-controller/releases
 (cd clusters/emea-tp-main && ytt -f sync/config --data-values-file sync/values.yaml | kapp deploy -a sync -y -f -)
 ```
 
-## Virtual Workload clusters
+## Workload clusters
 
-### Get kubeconfig for workload clusters
+### Add TP for K8s Capabilities
 ```
-vcluster connect tp-vcluster-1 -n tp-vcluster-1 --print --server=https://tp-vcluster-1.main.emea.end2end.link > ~/Downloads/tp-vcluster-1-kubeconfig.yaml
-```
-
-## Add TP for K8s Capabilities
-
-### Add overlays
-```
-kubectl apply -f tp4k8s/capabilities/overlays
-kubectl annotate pkgi tcs.tanzu.vmware.com -n tanzu-cluster-group-system ext.packaging.carvel.dev/ytt-paths-from-secret-name.0=tcs-overlay-secret
-kubectl annotate pkgi egress.tanzu.vmware.com -n tanzu-cluster-group-system ext.packaging.carvel.dev/ytt-paths-from-secret-name.0=egress-overlay-secret
+tanzu operations clustergroup use <sa-region>-workload
+ytt -f tp4k8s/cluster-group | kubectl apply -f -
 ```

@@ -25,5 +25,5 @@ educates:
 tp_k8s:
   org: 77aee83b-308f-4c8e-b9c4-3f7a6f19ba75
   project: EMEA
-  profiles: emea-tsalm-web-workload
-  availability_target: emea-tsalm-eu-central
+  profiles: emea-web-workload
+  availability_target: emea
