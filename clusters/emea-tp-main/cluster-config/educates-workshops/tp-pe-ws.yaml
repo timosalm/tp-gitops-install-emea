@@ -111,20 +111,20 @@ spec:
         - kapp:
             rawOptions:
             - --app-changes-max-to-keep=5
-        - apiVersion: projectcontour.io/v1
-          kind: HTTPProxy
-          metadata:
-            name: vcluster-$(session_namespace)
-            namespace: $(session_namespace)
-          spec:
-            virtualhost:
-              fqdn: vcluster-$(session_namespace).$(ingress_domain)
-              tls:
-                passthrough: true
-            tcpproxy:
-              services:
-              - name: vcluster-$(session_namespace)
-                port: 443
+    - apiVersion: projectcontour.io/v1
+      kind: HTTPProxy
+      metadata:
+        name: vcluster-$(session_namespace)
+        namespace: $(session_namespace)
+      spec:
+        virtualhost:
+          fqdn: vcluster-$(session_namespace).$(ingress_domain)
+          tls:
+            passthrough: true
+        tcpproxy:
+          services:
+          - name: vcluster-$(session_namespace)
+            port: 443
     - apiVersion: secrets.educates.dev/v1beta1
       kind: SecretCopier
       metadata:
