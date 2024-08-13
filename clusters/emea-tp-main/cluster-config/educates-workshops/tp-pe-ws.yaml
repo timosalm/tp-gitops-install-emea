@@ -53,6 +53,10 @@ spec:
       name: public-registry
       port: 5000
       protocol: http
+    - host: inclusion-$(session_name).$(ingress_domain)
+      name: tls-inclusion
+      port: 80
+      protocol: http
     namespaces:
       budget: custom
       security:
