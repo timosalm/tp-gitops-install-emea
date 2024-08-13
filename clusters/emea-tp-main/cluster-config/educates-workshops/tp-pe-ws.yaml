@@ -22,6 +22,8 @@ spec:
       terminal:
         enabled: true
         layout: split
+      vcluster:
+        enabled: true
     env:
     - name: PUBLIC_REGISTRY_HOST
       value: public-registry-$(session_name).$(ingress_domain)
