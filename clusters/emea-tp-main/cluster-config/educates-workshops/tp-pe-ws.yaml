@@ -64,8 +64,8 @@ spec:
         values.yaml: |
           syncer:
             extraArgs:
-            - --tls-san=vcluster.$(session_namespace).$(ingress_domain)
-            - --out-kube-config-server=https://vcluster.$(session_namespace).$(ingress_domain)
+            - --tls-san=vcluster-$(session_namespace).$(ingress_domain)
+            - --out-kube-config-server=https://vcluster-$(session_namespace).$(ingress_domain)
           sync:
             ingresses:
               enabled: true
@@ -123,7 +123,7 @@ spec:
             passthrough: true
         tcpproxy:
           services:
-          - name: vcluster-$(session_namespace)
+          - name: vcluster
             port: 443
     - apiVersion: secrets.educates.dev/v1beta1
       kind: SecretCopier
