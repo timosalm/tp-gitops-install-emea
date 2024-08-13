@@ -57,6 +57,10 @@ spec:
       name: tls-inclusion
       port: 80
       protocol: http
+    - host: web.simmons.edu
+      name: test
+      port: 80
+      protocol: http
     namespaces:
       budget: custom
       security:
