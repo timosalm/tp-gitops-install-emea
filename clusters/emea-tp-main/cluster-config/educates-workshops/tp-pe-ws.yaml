@@ -58,8 +58,8 @@ spec:
     - apiVersion: v1
       kind: Secret
       metadata:
-        name: $(session_name)-vcluster-values
-        namespace: $(workshop_namespace)
+        name: vcluster-values
+        namespace: $(session_namespace)
       stringData:
         values.yaml: |
           syncer:
@@ -72,8 +72,8 @@ spec:
     - apiVersion: kappctrl.k14s.io/v1alpha1
       kind: App
       metadata:
-        name: $(session_name)-vcluster-package
-        namespace: $(workshop_namespace)
+        name: vcluster-package
+        namespace: $(session_namespace)
       spec:
         serviceAccountName: $(service_account)
         syncPeriod: 720h
@@ -89,7 +89,7 @@ spec:
             namespace: $(session_namespace)
             valuesFrom:
             - secretRef:
-                name: $(session_name)-vcluster-values
+                name: vcluster-values
         - ytt:
             inline:
               paths:
