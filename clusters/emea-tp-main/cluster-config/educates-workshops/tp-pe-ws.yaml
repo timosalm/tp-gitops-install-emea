@@ -5,10 +5,23 @@ kind: Workshop
 metadata:
   name: tp-pe
 spec:
+  title: Tanzu Platform for Platform Engineers (EMEA)
   description: The workshop covers the fundamentals of Tanzu Platform for Platform
     Engineers.
   publish:
     image: $(image_repository)/lab-tanzu-platform-lab-platform-engineer-files:$(workshop_version)
+  workshop:
+    files:
+    - git:
+        ref: origin/educates-platform-engineer
+        url: https://github.com/Tanzu-Solutions-Engineering/tanzu-platform-workshop
+      includePaths:
+      - /lab-platform-engineer/educates/workshop/**
+      - /lab-platform-engineer/educates/exercises/**
+      - /lab-platform-engineer/educates/README.md
+      newRootPath: /lab-platform-engineer/educates
+      path: .
+    image: ghcr.io/timosalm/tanzu-platform-workshop/lab-platform-engineer-image:educates-platform-engineer
   session:
     applications:
       console:
@@ -30,10 +43,6 @@ spec:
     - name: TANZU_PLATFORM_PROJECT
       value: #@ data.values.tp_k8s.project
     ingresses:
-    - host: sample-app.$(session_namespace)
-      name: sample-app
-      port: 8080
-      protocol: http
     - authentication:
         type: none
       headers:
@@ -64,8 +73,8 @@ spec:
         values.yaml: |
           syncer:
             extraArgs:
-            - --tls-san="vcluster-$(session_namespace).$(ingress_domain)"
-            - --out-kube-config-server="https://vcluster-$(session_namespace).$(ingress_domain)"
+            - --tls-san=vcluster-$(session_namespace).$(ingress_domain)
+            - --out-kube-config-server=https://vcluster-$(session_namespace).$(ingress_domain)
           sync:
             ingresses:
               enabled: true
@@ -195,16 +204,3 @@ spec:
       - kind: ServiceAccount
         name: $(service_account)
         namespace: $(workshop_namespace)
-  title: Tanzu Platform for Platform Engineers (EMEA)
-  workshop:
-    files:
-    - git:
-        ref: origin/educates-platform-engineer
-        url: https://github.com/Tanzu-Solutions-Engineering/tanzu-platform-workshop
-      includePaths:
-      - /lab-platform-engineer/educates/workshop/**
-      - /lab-platform-engineer/educates/exercises/**
-      - /lab-platform-engineer/educates/README.md
-      newRootPath: /lab-platform-engineer/educates
-      path: .
-    image: ghcr.io/timosalm/tanzu-platform-workshop/lab-platform-engineer-image:educates-platform-engineer
