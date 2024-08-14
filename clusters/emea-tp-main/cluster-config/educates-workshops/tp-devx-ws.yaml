@@ -91,7 +91,7 @@ spec:
     - name: PUBLIC_REGISTRY_HOST
       value: public-registry-$(session_name).$(ingress_domain)
     - name: TANZU_CLI_CLOUD_SERVICES_ORGANIZATION_ID
-      value: #@ data.values.tp_k8s.org
+      value: #@ data.values.tp_k8s.org.id
     - name: TANZU_PLATFORM_PROJECT
       value: #@ data.values.tp_k8s.project
     - name: TANZU_PLATFORM_PROFILES

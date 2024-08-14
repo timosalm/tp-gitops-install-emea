@@ -23,7 +23,9 @@ harbor:
 educates:
   version: 2.7.2
 tp_k8s:
-  org: 77aee83b-308f-4c8e-b9c4-3f7a6f19ba75
+  org: 
+    id: 77aee83b-308f-4c8e-b9c4-3f7a6f19ba75
+    name: sa-tanzu-platform
   project: EMEA
   profiles: emea-web-workload
   availability_target: emea
