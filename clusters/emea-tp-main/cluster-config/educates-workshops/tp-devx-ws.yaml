@@ -117,7 +117,7 @@ spec:
       security:
         token:
           enabled: false
-  title: Tanzu Platform Developer Experience (EMEA)
+  title: Tanzu Platform Developer Experience (SA EMEA)
   workshop:
     files:
     - git:
