@@ -22,6 +22,11 @@ kapp deploy -a sg -f https://github.com/carvel-dev/secretgen-controller/releases
 (cd clusters/emea-tp-main && ytt -f sync/config --data-values-file sync/values.yaml | kapp deploy -a sync -y -f -)
 ```
 
+### Deploy "emea-tp-workload-1" cluster sync
+```
+(cd clusters/emea-tp-main && ytt -f sync/config --data-values-file sync/values.yaml | kapp deploy -a sync -y -f -)
+```
+
 ## Workload clusters
 
 ### Add TP for K8s Capabilities
