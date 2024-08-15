@@ -21,8 +21,8 @@ spec:
       - /lab-platform-engineer/educates/README.md
       newRootPath: /lab-platform-engineer/educates
       path: .
-    image: ghcr.io/timosalm/tanzu-platform-workshop/lab-platform-engineer-image@sha256:324bc7e6ff946f243c468c48e4a00e91f9c2ca484f5216c8187502179ad58654
-    #! image: ghcr.io/tanzu-solutions-engineering/tanzu-platform-workshop/lab-platform-engineer-image:main
+    #! image: ghcr.io/timosalm/tanzu-platform-workshop/lab-platform-engineer-image@sha256:324bc7e6ff946f243c468c48e4a00e91f9c2ca484f5216c8187502179ad58654
+    image: ghcr.io/tanzu-solutions-engineering/tanzu-platform-workshop/lab-platform-engineer-image:main
   session:
     applications:
       console:
