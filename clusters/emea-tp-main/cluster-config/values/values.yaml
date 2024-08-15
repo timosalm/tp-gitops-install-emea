@@ -10,6 +10,7 @@ common:
       namespace: cert-manager 
 aws:
   region: eu-central-1
+  cluster_name: emea-tp-main
   secrets_manager:
     role_arn: arn:aws:iam::377668981663:role/emea-tp-main-secret-reader
     remote_refs:
