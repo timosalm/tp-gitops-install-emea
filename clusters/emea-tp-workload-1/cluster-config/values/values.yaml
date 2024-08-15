@@ -1,0 +1,6 @@
+aws:
+  cluster:
+    name: emea-tp-workload-1
+    version: v1.30.2
+    autoscaler:
+      role: arn:aws:iam::377668981663:role/EmeaTpWorkload1ClusterAutoScaler

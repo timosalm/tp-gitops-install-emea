@@ -1,0 +1,22 @@
+#@ load("@ytt:data", "data")
+---
+apiVersion: kappctrl.k14s.io/v1alpha1
+kind: App
+metadata:
+  name: sync
+  namespace: default
+spec:
+  serviceAccountName: sync-sa
+  fetch:
+    - git:
+        url: #@ data.values.git.url
+        ref: #@ data.values.git.ref
+        subPath: #@ data.values.git.sub_path
+  template:
+    - ytt:
+        paths: 
+        - config
+        valuesFrom:
+        - path: values
+  deploy:
+    - kapp: {}

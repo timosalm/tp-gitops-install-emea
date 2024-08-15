@@ -1,0 +1,4 @@
+git:
+  url: https://github.com/timosalm/tp-gitops-install-emea.git
+  ref: origin/main
+  sub_path: clusters/emea-tp-workload-1/cluster-config
