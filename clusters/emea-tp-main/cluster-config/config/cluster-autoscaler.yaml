@@ -9,6 +9,8 @@ metadata:
     k8s-app: cluster-autoscaler
   name: cluster-autoscaler
   namespace: kube-system
+  annotations:
+    eks.amazonaws.com/role-arn: #@ data.values.aws.cluster.autoscaler.role
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
@@ -150,7 +152,7 @@ spec:
           type: RuntimeDefault
       serviceAccountName: cluster-autoscaler
       containers:
-        - image: registry.k8s.io/autoscaling/cluster-autoscaler:v1.26.2
+        - image: #@ "registry.k8s.io/autoscaling/cluster-autoscaler:{}".format(data.values.aws.cluster.version)
           name: cluster-autoscaler
           resources:
             limits:
@@ -166,7 +168,7 @@ spec:
             - --cloud-provider=aws
             - --skip-nodes-with-local-storage=false
             - --expander=least-waste
-            - #@ "--node-group-auto-discovery=asg:tag=k8s.io/cluster-autoscaler/enabled,k8s.io/cluster-autoscaler/{}".format(data.values.aws.cluster_name)
+            - #@ "--node-group-auto-discovery=asg:tag=k8s.io/cluster-autoscaler/enabled,k8s.io/cluster-autoscaler/{}".format(data.values.aws.cluster.name)
             - --balance-similar-node-groups #! Added manually
             - --skip-nodes-with-system-pods=false #! Added manually
           volumeMounts:
