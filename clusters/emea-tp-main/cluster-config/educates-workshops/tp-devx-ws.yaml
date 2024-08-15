@@ -132,6 +132,6 @@ spec:
     packages:
     - files:
       - image:
-          url: ghcr.io/timosalm/tanzu-platform-workshop/lab-tanzu-platform-developer-experience-tanzu-cli-extension-package:v1.3.0
+          url: ghcr.io/tanzu-solutions-engineering/tanzu-platform-workshop/lab-tanzu-platform-developer-experience-tanzu-cli-extension-package:v1.4.1
         path: .
       name: tanzu-cli
