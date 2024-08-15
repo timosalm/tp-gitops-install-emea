@@ -126,6 +126,8 @@ metadata:
   namespace: kube-system
   labels:
     app: cluster-autoscaler
+  annotations:
+    "cluster-autoscaler.kubernetes.io/safe-to-evict": "false" #! Added manually
 spec:
   replicas: 1
   selector:
@@ -165,6 +167,8 @@ spec:
             - --skip-nodes-with-local-storage=false
             - --expander=least-waste
             - #@ "--node-group-auto-discovery=asg:tag=k8s.io/cluster-autoscaler/enabled,k8s.io/cluster-autoscaler/{}".format(data.values.aws.cluster_name)
+            - --balance-similar-node-groups #! Added manually
+            - --skip-nodes-with-system-pods-false #! Added manually
           volumeMounts:
             - name: ssl-certs
               mountPath: /etc/ssl/certs/ca-certificates.crt #! /etc/ssl/certs/ca-bundle.crt for Amazon Linux Worker Nodes
