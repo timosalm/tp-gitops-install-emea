@@ -17,5 +17,13 @@ spec:
       template:
       - helmTemplate:
           namespace: cert-manager
+      - ytt:
+          inline:
+            paths:
+              overlay.yml: |
+                #@ load("@ytt:overlay", "overlay")
+                #@overlay/match by=overlay.subset({"kind":"PodDisruptionBudget"}),expects="0+"
+                #@overlay/remove
+                ---
       deploy:
       - kapp: {}

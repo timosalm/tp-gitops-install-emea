@@ -14,6 +14,14 @@ spec:
           version: 8.3.3
           repository:
             url: oci://registry-1.docker.io/bitnamicharts
+      - ytt:
+          inline:
+            paths:
+              overlay.yml: |
+                #@ load("@ytt:overlay", "overlay")
+                #@overlay/match by=overlay.subset({"kind":"PodDisruptionBudget"}),expects="0+"
+                #@overlay/remove
+                ---
       template:
       - helmTemplate:
           namespace: external-dns

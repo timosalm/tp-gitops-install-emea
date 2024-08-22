@@ -9,10 +9,14 @@
 ### Prerequisites
 
 #### Install kapp-controller
+Only necessary if cluster is/will not be attached to TMC / Tanzu Platform Kubernetes Operartions.
+
 ```
 kapp deploy -a kc -f https://github.com/carvel-dev/kapp-controller/releases/latest/download/release.yml
 ```
 #### Install secretgen-controller
+Only necessary if cluster is/will not be attached to TMC / Tanzu Platform Kubernetes Operartions.
+
 ```
 kapp deploy -a sg -f https://github.com/carvel-dev/secretgen-controller/releases/latest/download/release.yml
 ```
