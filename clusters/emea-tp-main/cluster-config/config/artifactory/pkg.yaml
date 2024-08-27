@@ -11,7 +11,7 @@ spec:
       fetch:
       - helmChart:
           name: artifactory
-          version: 7.90.8
+          version: 107.90.8
           repository:
             url: https://charts.jfrog.io
       template:
