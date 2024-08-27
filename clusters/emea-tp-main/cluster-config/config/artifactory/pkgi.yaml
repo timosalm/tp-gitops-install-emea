@@ -1,0 +1,11 @@
+apiVersion: packaging.carvel.dev/v1alpha1
+kind: PackageInstall
+metadata:
+  name: artifactory
+  namespace: tp-install
+spec:
+  serviceAccountName: tp-installer-sa
+  packageRef:
+    refName: artifactory.timosalm.de
+    versionSelection:
+      constraints: '>=0.0.0'

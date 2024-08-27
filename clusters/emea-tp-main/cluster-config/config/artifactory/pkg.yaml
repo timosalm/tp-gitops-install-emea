@@ -1,0 +1,21 @@
+apiVersion: data.packaging.carvel.dev/v1alpha1
+kind: Package
+metadata:
+  name: artifactory.timosalm.de.1.0.0
+  namespace: tp-install
+spec:
+  refName: artifactory.timosalm.de
+  version: "1.0.0"
+  template:
+    spec:
+      fetch:
+      - helmChart:
+          name: jfrog/artifactory
+          version: 7.90.8
+          repository:
+            url: https://charts.jfrog.io
+      template:
+      - helmTemplate:
+          namespace: artifactory
+      deploy:
+      - kapp: {}
