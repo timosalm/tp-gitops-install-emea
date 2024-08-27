@@ -10,7 +10,7 @@ spec:
     spec:
       fetch:
       - helmChart:
-          name: jfrog/artifactory
+          name: artifactory
           version: 7.90.8
           repository:
             url: https://charts.jfrog.io
