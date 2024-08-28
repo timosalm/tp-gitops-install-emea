@@ -38,6 +38,11 @@ spec:
       security:
         token:
           enabled: false
+    ingresses:
+    - name: app-advisor-server
+      protocol: http
+      host: app-advisor.$(session_namespace)
+      port: 8080
     applications:
       terminal:
         enabled: true
@@ -46,3 +51,34 @@ spec:
         enabled: true
       git:
         enabled: true
+    objects:
+    - apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: app-advisor
+      spec:
+        replicas: 1
+        selector:
+          matchLabels:
+            app.kubernetes.io/name: app-advisor
+        template:
+          metadata:
+            labels:
+              app.kubernetes.io/name: app-advisor
+          spec:
+            containers:
+            - name: workload
+              image: ghcr.io/timosalm/spring-application-advisor-workshop/app-advisor-server-image:main
+              ports:
+              - containerPort: 8080
+    - apiVersion: v1
+      kind: Service
+      metadata:
+        name: app-advisor
+      spec:
+        selector:
+          app.kubernetes.io/name: app-advisor
+        ports:
+          - protocol: TCP
+            port: 8080
+            targetPort: 8080
