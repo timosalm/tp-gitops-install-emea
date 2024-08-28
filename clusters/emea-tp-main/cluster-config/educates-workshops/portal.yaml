@@ -26,8 +26,8 @@ spec:
     overtime: 30m
     reserved: 0
   - capacity: 40
-    deadline: 4h
-    expires: 2h
+    deadline: 2h
+    expires: 1h
     name: spring-application-advisor
     orphaned: 1h
     overtime: 30m

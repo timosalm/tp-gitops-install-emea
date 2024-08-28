@@ -44,3 +44,5 @@ spec:
         layout: split
       editor:
         enabled: true
+      git:
+        enabled: true
