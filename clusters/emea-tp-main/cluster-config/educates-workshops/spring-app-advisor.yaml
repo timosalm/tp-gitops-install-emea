@@ -42,6 +42,7 @@ spec:
       security:
         token:
           enabled: false
+        policy: baseline
     ingresses:
     - name: app-advisor-server
       protocol: http
@@ -70,19 +71,13 @@ spec:
             labels:
               app.kubernetes.io/name: app-advisor
           spec:
+            imagePullSecrets:
+            - spring-application-advisor-workshop-image-pull-secret
             containers:
             - name: workload
               image: ghcr.io/timosalm/spring-application-advisor-workshop/app-advisor-server-image:main
               ports:
               - containerPort: 8080
-              securityContext:
-                allowPrivilegeEscalation: false
-                readOnlyRootFilesystem: true
-                runAsNonRoot: true
-                runAsUser: 1001
-                capabilities:
-                  drop:
-                    - ALL
     - apiVersion: v1
       kind: Service
       metadata:
