@@ -69,7 +69,7 @@ spec:
               app.kubernetes.io/name: app-advisor
           spec:
             imagePullSecrets:
-            - spring-application-advisor-workshop-image-pull-secret
+            - name: spring-application-advisor-workshop-image-pull-secret
             containers:
             - name: workload
               image: ghcr.io/timosalm/spring-application-advisor-workshop/app-advisor-server-image:main
