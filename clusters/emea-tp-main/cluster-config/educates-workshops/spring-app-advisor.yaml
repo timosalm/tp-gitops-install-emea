@@ -21,6 +21,17 @@ spec:
     secrets:
     - name: spring-application-advisor-workshop-image-pull-secret
       namespace: educates
+    objects:
+    - apiVersion: secrets.educates.dev/v1beta1
+      kind: SecretInjector
+      metadata:
+        name: spring-application-advisor-workshop-image-pull-secret
+      spec:
+        rules:
+        - sourceSecrets:
+            nameSelector:
+              matchNames:
+              - spring-application-advisor-workshop-image-pull-secret
   session:
     namespaces:
       budget: large
