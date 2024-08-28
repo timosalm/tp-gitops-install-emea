@@ -103,13 +103,3 @@ spec:
         #@ registry_creds = {"username": data.values.sensitive.workshops.spring_app_advisor.workshop_image.username, "password": data.values.sensitive.workshops.spring_app_advisor.workshop_image.password}
         #@ encoded_creds = base64.encode(json.encode({"auths": {"ghcr.io": registry_creds}}))
         .dockerconfigjson: #@ encoded_creds
-    - apiVersion: secrets.educates.dev/v1beta1
-      kind: SecretInjector
-      metadata:
-        name: spring-application-advisor-workshop-image-pull-secret
-      spec:
-        rules:
-        - sourceSecrets:
-            nameSelector:
-              matchNames:
-              - spring-application-advisor-workshop-image-pull-secret
