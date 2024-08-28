@@ -1,3 +1,7 @@
+#@ load("@ytt:data", "data")
+#@ load("@ytt:json", "json")
+#@ load("@ytt:base64", "base64")
+---
 apiVersion: training.educates.dev/v1beta1
 kind: Workshop
 metadata:
@@ -90,3 +94,22 @@ spec:
           - protocol: TCP
             port: 8080
             targetPort: 8080
+    - apiVersion: v1
+      kind: Secret
+      metadata:
+        name: spring-application-advisor-workshop-image-pull-secret
+      type: kubernetes.io/dockerconfigjson
+      data:
+        #@ registry_creds = {"username": data.values.sensitive.workshops.spring_app_advisor.workshop_image.username, "password": data.values.sensitive.workshops.spring_app_advisor.workshop_image.password}
+        #@ encoded_creds = base64.encode(json.encode({"auths": {"ghcr.io": registry_creds}}))
+        .dockerconfigjson: #@ encoded_creds
+    - apiVersion: secrets.educates.dev/v1beta1
+      kind: SecretInjector
+      metadata:
+        name: spring-application-advisor-workshop-image-pull-secret
+      spec:
+        rules:
+        - sourceSecrets:
+            nameSelector:
+              matchNames:
+              - spring-application-advisor-workshop-image-pull-secret
