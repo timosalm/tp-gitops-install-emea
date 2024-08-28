@@ -71,6 +71,8 @@ spec:
               image: ghcr.io/timosalm/spring-application-advisor-workshop/app-advisor-server-image:main
               ports:
               - containerPort: 8080
+              securityContext:
+                runAsNonRoot: true
     - apiVersion: v1
       kind: Service
       metadata:
