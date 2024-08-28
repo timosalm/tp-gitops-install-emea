@@ -76,6 +76,9 @@ spec:
                 readOnlyRootFilesystem: true
                 runAsNonRoot: true
                 runAsUser: 1001
+                capabilities:
+                  drop:
+                    - ALL
     - apiVersion: v1
       kind: Service
       metadata:
