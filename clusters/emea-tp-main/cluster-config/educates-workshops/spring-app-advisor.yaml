@@ -22,9 +22,6 @@ spec:
       - /exercises/**
       - /README.md
   environment:
-    secrets:
-    - name: spring-application-advisor-workshop-image-pull-secret
-      namespace: educates
     objects:
     - apiVersion: secrets.educates.dev/v1beta1
       kind: SecretInjector
