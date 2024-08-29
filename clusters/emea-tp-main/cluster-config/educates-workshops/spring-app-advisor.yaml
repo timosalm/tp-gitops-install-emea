@@ -37,6 +37,8 @@ spec:
       protocol: http
       host: app-advisor.$(session_namespace)
       port: 8080
+      authentication:
+        type: none
     applications:
       terminal:
         enabled: true
