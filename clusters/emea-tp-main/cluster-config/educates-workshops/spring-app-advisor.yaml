@@ -21,18 +21,10 @@ spec:
       - /workshop/**
       - /exercises/**
       - /README.md
-  environment:
-    objects:
-    - apiVersion: secrets.educates.dev/v1beta1
-      kind: SecretInjector
-      metadata:
-        name: spring-application-advisor-workshop-image-pull-secret
-      spec:
-        rules:
-        - sourceSecrets:
-            nameSelector:
-              matchNames:
-              - spring-application-advisor-workshop-image-pull-secret
+  environment: 
+    secrets:
+    - name: spring-application-advisor-workshop-image-pull-secret
+      namespace: educates
   session:
     namespaces:
       budget: large
@@ -53,6 +45,9 @@ spec:
         enabled: true
       git:
         enabled: true
+    patches:
+      imagePullSecrets:
+      - name: spring-application-advisor-workshop-image-pull-secret
     objects:
     - apiVersion: apps/v1
       kind: Deployment
