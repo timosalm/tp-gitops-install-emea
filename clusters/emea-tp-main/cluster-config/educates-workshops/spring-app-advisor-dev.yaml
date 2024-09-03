@@ -140,6 +140,8 @@ spec:
                         controller: true
                         name: $(session_name)
                         uid: $(workshop_session_uid)
+                    #@overlay/match missing_ok=True
+                    namespace: $(session_namespace)
                       
                   #@overlay/match by=overlay.subset({"kind":"PodDisruptionBudget"}),expects="0+"
                   #@overlay/remove
@@ -162,6 +164,12 @@ spec:
                 ENABLE_PUSH_CREATE_USER: true
                 DEFAULT_PRIVATE: public
                 DEFAULT_BRANCH: main
+          redis-cluster:
+            enabled: false
+          redis:
+            enabled: false
+          postgresql-ha:
+            enabled: false
     - apiVersion: rbac.authorization.k8s.io/v1
       kind: Role
       metadata:
