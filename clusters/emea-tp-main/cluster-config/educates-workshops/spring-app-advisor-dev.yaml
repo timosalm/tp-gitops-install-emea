@@ -112,8 +112,8 @@ spec:
         - helmChart:
             name: gitea
             repository:
-              url: oci://registry-1.docker.io/bitnamicharts
-            version: 2.3.18
+              url: oci://registry-1.docker.io/giteacharts
+            version: 10.4.0
         serviceAccountName: $(service_account)
         syncPeriod: 720h
         noopDelete: true
@@ -152,7 +152,16 @@ spec:
       stringData:
         #! "github" prefix as Spring Application Advisor is using the url to choose API client implementation
         values.yaml: |
-          service.type: ClusterIP
+          gitea:
+            admin:
+              username: developer
+              password: developer
+            config:
+              repository:
+                DEFAULT_PUSH_CREATE_PRIVATE: false
+                ENABLE_PUSH_CREATE_USER: true
+                DEFAULT_PRIVATE: public
+                DEFAULT_BRANCH: main
     - apiVersion: rbac.authorization.k8s.io/v1
       kind: Role
       metadata:
