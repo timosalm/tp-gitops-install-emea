@@ -140,6 +140,10 @@ spec:
                         controller: true
                         name: $(session_name)
                         uid: $(workshop_session_uid)
+                      
+                  #@overlay/match by=overlay.subset({"kind":"PodDisruptionBudget"}),expects="0+"
+                  #@overlay/remove
+                  ---
     - apiVersion: v1
       kind: Secret
       metadata:
