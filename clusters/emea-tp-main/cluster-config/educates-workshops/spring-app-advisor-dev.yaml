@@ -152,7 +152,6 @@ spec:
       stringData:
         #! "github" prefix as Spring Application Advisor is using the url to choose API client implementation
         values.yaml: |
-          rootURL: github-$(session_namespace).$(ingress_domain)
           service.type: ClusterIP
     - apiVersion: rbac.authorization.k8s.io/v1
       kind: Role
