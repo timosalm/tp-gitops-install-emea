@@ -41,10 +41,14 @@ spec:
       port: 8080
       authentication:
         type: none
+      #! "github" prefix as Spring Application Advisor is using the url to choose API client implementation
     - name: github
       protocol: http
       host: $(session_name)-gitea.$(session_namespace)
       port: 80
+      headers:
+      - name: Authorization
+        value: "Basic ZGV2ZWxvcGVyOmRldmVsb3Blcgo="
       authentication:
         type: none
     applications:
@@ -107,7 +111,8 @@ spec:
         namespace: $(workshop_namespace)
       spec:
         deploy:
-        - kapp: {}
+        - kapp: 
+            intoNs: $(session_namespace)
         fetch:
         - helmChart:
             name: gitea
@@ -146,13 +151,13 @@ spec:
                   #@overlay/match by=overlay.subset({"kind":"PodDisruptionBudget"}),expects="0+"
                   #@overlay/remove
                   ---
+
     - apiVersion: v1
       kind: Secret
       metadata:
         name: $(session_name)-gitea-values
         namespace: $(workshop_namespace)
       stringData:
-        #! "github" prefix as Spring Application Advisor is using the url to choose API client implementation
         values.yaml: |
           gitea:
             admin:
@@ -170,6 +175,10 @@ spec:
             enabled: false
           postgresql-ha:
             enabled: false
+          postgresql:
+            enabled: true
+          test:
+            enabled: false 
     - apiVersion: rbac.authorization.k8s.io/v1
       kind: Role
       metadata:
