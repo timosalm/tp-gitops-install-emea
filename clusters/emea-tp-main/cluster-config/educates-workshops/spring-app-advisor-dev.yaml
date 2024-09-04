@@ -47,8 +47,8 @@ spec:
       host: $(session_namespace)-gitea-http.$(session_namespace)
       port: 3000
       headers:
-      - name: Authorization
-        value: "Basic ZGV2ZWxvcGVyOmRldmVsb3Blcgo=" #! developer:developer
+      - name: X-WEBAUTH-USER
+        value: "developer"
       authentication:
         type: none
     applications:
@@ -169,6 +169,9 @@ spec:
                 ENABLE_PUSH_CREATE_USER: true
                 DEFAULT_PRIVATE: public
                 DEFAULT_BRANCH: main
+              service:
+                ENABLE_REVERSE_PROXY_AUTHENTICATION: true
+                ENABLE_REVERSE_PROXY_AUTHENTICATION_API: true
           redis-cluster:
             enabled: false
           redis:
