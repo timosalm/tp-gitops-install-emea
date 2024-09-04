@@ -37,18 +37,18 @@ spec:
       port: 8080
     - name: app-advisor-server
       protocol: http
-      host: $(session_namespace)-gitea-http
-      port: 3000
+      host: app-advisor.$(session_namespace)
+      port: 8080
       authentication:
         type: none
       #! "github" prefix as Spring Application Advisor is using the url to choose API client implementation
     - name: github
       protocol: http
-      host: $(session_name)-gitea.$(session_namespace)
-      port: 80
+      host: $(session_namespace)-gitea-http
+      port: 3000
       headers:
       - name: Authorization
-        value: "Basic ZGV2ZWxvcGVyOmRldmVsb3Blcgo="
+        value: "Basic ZGV2ZWxvcGVyOmRldmVsb3Blcgo=" #! developer:developer
       authentication:
         type: none
     applications:
