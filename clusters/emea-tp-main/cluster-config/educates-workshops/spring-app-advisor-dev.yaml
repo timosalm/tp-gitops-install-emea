@@ -44,7 +44,7 @@ spec:
       #! "github" prefix as Spring Application Advisor is using the url to choose API client implementation
     - name: github
       protocol: http
-      host: $(session_namespace)-gitea-http
+      host: $(session_namespace)-gitea-http.$(session_namespace)
       port: 3000
       headers:
       - name: Authorization
