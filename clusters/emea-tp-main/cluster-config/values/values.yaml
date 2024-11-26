@@ -22,6 +22,7 @@ aws:
       educates_workshops: dev/emea-tp-main/educates-workshops
   dns:
     hosted_zone_id: Z04147751VKC48IKUQS06
+    hosted_zone_id_workloads: Z09997511J7Z7B4JHOF83
     role: arn:aws:iam::377668981663:role/EmeaE2EDemoHostedZoneChanger
 harbor: 
   url: https://harbor.main.emea.end2end.link
