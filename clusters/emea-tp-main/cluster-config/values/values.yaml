@@ -5,6 +5,7 @@ git:
 common:
   ingress:
     domain: main.emea.end2end.link
+    domain_workloads: workloads.emea.end2end.link
     certificate:
       name: tls-cert
       namespace: cert-manager 
