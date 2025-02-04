@@ -131,7 +131,7 @@ metadata:
   annotations:
     "cluster-autoscaler.kubernetes.io/safe-to-evict": "false" #! Added manually
 spec:
-  replicas: 1
+  replicas: 0
   selector:
     matchLabels:
       app: cluster-autoscaler
