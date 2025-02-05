@@ -119,6 +119,7 @@ spec:
           enabled: false
   title: Tanzu Platform Developer Experience (SA EMEA)
   workshop:
+    image: "ghcr.io/tanzu-solutions-engineering/tanzu-platform-workshop/lab-devx-image:main"
     files:
     - git:
         ref: origin/main
@@ -129,9 +130,3 @@ spec:
       - /lab-tanzu-platform-developer-experience/README.md
       newRootPath: lab-tanzu-platform-developer-experience
       path: .
-    packages:
-    - files:
-      - image:
-          url: ghcr.io/tanzu-solutions-engineering/tanzu-platform-workshop/lab-tanzu-platform-developer-experience-tanzu-cli-extension-package:v1.5.1
-        path: .
-      name: tanzu-cli
