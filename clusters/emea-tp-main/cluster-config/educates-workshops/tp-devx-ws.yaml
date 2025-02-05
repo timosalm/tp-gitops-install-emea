@@ -7,68 +7,6 @@ metadata:
 spec:
   description: The workshop covers the developer experience of deploying applications
     to the Tanzu Platform.
-  environment:
-    objects:
-    - apiVersion: v1
-      kind: ServiceAccount
-      metadata:
-        name: kapp-installer
-    - apiVersion: rbac.authorization.k8s.io/v1
-      kind: Role
-      metadata:
-        name: kapp-installer-role
-      rules:
-      - apiGroups:
-        - '*'
-        resources:
-        - '*'
-        verbs:
-        - '*'
-    - apiVersion: rbac.authorization.k8s.io/v1
-      kind: RoleBinding
-      metadata:
-        name: kapp-installer-role-rolebinding
-      roleRef:
-        apiGroup: rbac.authorization.k8s.io
-        kind: Role
-        name: kapp-installer-role
-      subjects:
-      - kind: ServiceAccount
-        name: kapp-installer
-        namespace: $(workshop_namespace)
-    - apiVersion: v1
-      kind: Secret
-      metadata:
-        name: postgres-existing-secret
-      stringData:
-        password: #@ data.values.sensitive.workshops.tp_devx.db_password
-        postgres-password: #@ data.values.sensitive.workshops.tp_devx.db_password
-        replication-password: #@ data.values.sensitive.workshops.tp_devx.db_password
-      type: Opaque
-    - apiVersion: kappctrl.k14s.io/v1alpha1
-      kind: App
-      metadata:
-        name: postgres
-      spec:
-        deploy:
-        - kapp: {}
-        fetch:
-        - git:
-            ref: origin/main
-            subPath: lab-tanzu-platform-developer-experience/carvel-packages/postgres-package
-            url: https://github.com/Tanzu-Solutions-Engineering/tanzu-platform-workshop
-        noopDelete: true
-        serviceAccountName: kapp-installer
-        syncPeriod: 720h
-        template:
-        - ytt:
-            inline:
-              paths:
-                values.yaml: |
-                  #@data/values
-                  ---
-                  ingress_domain: $(ingress_domain)
-                  host_suffix: -$(environment_name)
   publish:
     image: $(image_repository)/lab-tanzu-platform-developer-experience-files:$(workshop_version)
   session:
@@ -102,6 +40,8 @@ spec:
       value: #@ data.values.tp_k8s.availability_target
     - name: TANZU_CLI_SPACE_CREATE_TOKEN
       value: #@ data.values.sensitive.tp_k8s.space_create_token
+    - name: DB_HOST
+      value: #@ data.values.tp_k8s.db_host
     - name: DB_PASSWORD
       value: #@ data.values.sensitive.workshops.tp_devx.db_password
     ingresses:

@@ -36,3 +36,4 @@ tp_k8s:
   project: EMEA-East
   profiles: epc-web-workload
   availability_target: epc
+  db_host: shared-inclusion-db.educates-devx-workshop.svc.cluster.local
