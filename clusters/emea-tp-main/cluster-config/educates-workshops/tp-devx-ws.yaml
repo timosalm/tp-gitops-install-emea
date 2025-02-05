@@ -96,6 +96,8 @@ spec:
       value: #@ data.values.tp_k8s.project
     - name: TANZU_PLATFORM_PROFILES
       value: #@ data.values.tp_k8s.profiles
+    - name: TANZU_PLATFORM_DOMAIN
+      value: #@ data.values.common.ingress.domain_workloads
     - name: TANZU_PLATFORM_AVAILABILITY_TARGETS
       value: #@ data.values.tp_k8s.availability_target
     - name: TANZU_CLI_SPACE_CREATE_TOKEN
