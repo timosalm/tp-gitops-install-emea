@@ -1,7 +1,0 @@
-#@data/values-schema
----
-sa_region: emea
-gslb:
-  domain: workloads.emea.end2end.link
-  tanzu_hub_credetials_ref: 618418ce63c7ccfab6ab24f3867e50f7
-  zone_id: Z09997511J7Z7B4JHOF83
