@@ -1,70 +1,32 @@
 apiVersion: training.educates.dev/v1beta1
 kind: Workshop
 metadata:
-  name: spring-ai
+  name: "spring-ai"
 spec:
-  description: Discover the power of Spring AI and learn how to integrate AI-driven
-    capabilities into your Spring applications, from leveraging LLMs to building intelligent
-    services with ease.
+  title: "Spring AI Introduction"
+  description: "Discover the power of Spring AI and learn how to integrate AI-driven capabilities into your Spring applications, from leveraging LLMs to building intelligent services with ease."
   publish:
-    image: $(image_repository)/spring-ai-files:$(workshop_version)
+    image: "$(image_repository)/spring-ai-files:$(workshop_version)"
+  workshop:
+    image: jdk21-environment:*
+    files:
+    - git:
+        url: https://github.com/nevenc/spring-ai-workshop
+        ref: origin/main
+      includePaths:
+      - /workshop/**
   session:
+    namespaces:
+      budget: large
+      security:
+        policy: baseline
     applications:
-      editor:
-        enabled: true
       terminal:
         enabled: true
         layout: split
-    namespaces:
-      budget: xxx-large
-      security:
-        policy: baseline
+      editor:
+        enabled: true
     objects:
-    - apiVersion: apps/v1
-      kind: Deployment
-      metadata:
-        name: llama
-      spec:
-        selector:
-          matchLabels:
-            app: llama
-        template:
-          metadata:
-            labels:
-              app: llama
-          spec:
-            containers:
-            - args:
-              - serve
-              command:
-              - ollama
-              image: ollama/ollama
-              lifecycle:
-                postStart:
-                  exec:
-                    command:
-                    - /bin/sh
-                    - -c
-                    - |
-                      ollama run llama3.2
-              name: ollama
-              ports:
-              - containerPort: 11434
-              resources:
-                limits:
-                  cpu: 6000m
-                  memory: 12Gi
-    - apiVersion: v1
-      kind: Service
-      metadata:
-        name: llama
-      spec:
-        ports:
-        - port: 11434
-          targetPort: 11434
-        selector:
-          app: llama
-        type: ClusterIP
     - apiVersion: apps/v1
       kind: Deployment
       metadata:
@@ -79,26 +41,133 @@ spec:
               app: vector-store
           spec:
             containers:
-            - image: redis/redis-stack-server
-              name: workload
+              -   image: redis/redis-stack-server
+                  name: workload
     - apiVersion: v1
       kind: Service
       metadata:
         name: vector-store
       spec:
-        ports:
-        - port: 6379
-          targetPort: 6379
+        type: ClusterIP
         selector:
           app: vector-store
+        ports:
+          - port: 6379
+            targetPort: 6379
+  environment:
+    objects:
+    - apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: llama
+      spec:
+        strategy:
+            type: Recreate
+        replicas: 5
+        selector:
+          matchLabels:
+            app: llama
+        template:
+          metadata:
+            labels:
+              app: llama
+          spec:
+            containers:
+            - name: ollama
+              args:
+              - serve
+              command:
+              - ollama
+              image: ollama/ollama
+              lifecycle:
+                postStart:
+                  exec:
+                    command:
+                    - /bin/sh
+                    - -c
+                    - |
+                      ollama run llama3.2
+              ports:
+              - containerPort: 11434
+              resources:
+                limits:
+                  cpu: 4000m
+                  memory: 6Gi
+    - apiVersion: v1
+      kind: Service
+      metadata:
+          name: llama
+      spec:
+          ports:
+          - port: 11434
+            targetPort: 11434
+          selector:
+            app: llama
+          clusterIP: None
+    - apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: llama-proxy
+      spec:
+        replicas: 3
+        selector:
+          matchLabels:
+            app: nginx
+        template:
+          metadata:
+            labels:
+              app: nginx
+          spec:
+            containers:
+              - name: nginx
+                image: nginx:latest
+                ports:
+                  - containerPort: 11434
+                volumeMounts:
+                  - name: nginx-config
+                    mountPath: /etc/nginx/nginx.conf
+                    subPath: nginx.conf
+            volumes:
+              - name: nginx-config
+                configMap:
+                  name: llama-proxy-config
+    - apiVersion: v1
+      kind: ConfigMap
+      metadata:
+        name: llama-proxy-config
+      data:
+        nginx.conf: |
+          events {
+            worker_connections 1024;
+          }
+
+          http {
+            resolver kube-dns.kube-system.svc.cluster.local valid=10s;
+
+            upstream llama_service {
+              zone llama_service_zone 64k;  # Required for runtime DNS resolution
+              server llama.$(workshop_namespace).svc.cluster.local:11434 resolve;
+            }
+
+            server {
+              listen 11434;
+
+              location / {
+                proxy_pass http://llama_service;
+
+                proxy_read_timeout 600s;
+              }
+            }
+          }
+    - apiVersion: v1
+      kind: Service
+      metadata:
+        name: llama-proxy
+      spec:
+        selector:
+          app: nginx
+        ports:
+          - protocol: TCP
+            port: 11434
+            targetPort: 11434
         type: ClusterIP
-  title: Spring AI Introduction
-  workshop:
-    files:
-    - git:
-        ref: origin/main
-        url: https://github.com/nevenc/spring-ai-workshop
-      includePaths:
-      - /workshop/**
-      path: .
-    image: jdk21-environment:*
