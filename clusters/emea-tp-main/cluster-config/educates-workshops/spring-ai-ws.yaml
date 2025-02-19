@@ -1,0 +1,104 @@
+apiVersion: training.educates.dev/v1beta1
+kind: Workshop
+metadata:
+  name: spring-ai
+spec:
+  description: Discover the power of Spring AI and learn how to integrate AI-driven
+    capabilities into your Spring applications, from leveraging LLMs to building intelligent
+    services with ease.
+  publish:
+    image: $(image_repository)/spring-ai-files:$(workshop_version)
+  session:
+    applications:
+      editor:
+        enabled: true
+      terminal:
+        enabled: true
+        layout: split
+    namespaces:
+      budget: xxx-large
+      security:
+        policy: baseline
+    objects:
+    - apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: llama
+      spec:
+        selector:
+          matchLabels:
+            app: llama
+        template:
+          metadata:
+            labels:
+              app: llama
+          spec:
+            containers:
+            - args:
+              - serve
+              command:
+              - ollama
+              image: ollama/ollama
+              lifecycle:
+                postStart:
+                  exec:
+                    command:
+                    - /bin/sh
+                    - -c
+                    - |
+                      ollama run llama3.2
+              name: ollama
+              ports:
+              - containerPort: 11434
+              resources:
+                limits:
+                  cpu: 6000m
+                  memory: 12Gi
+    - apiVersion: v1
+      kind: Service
+      metadata:
+        name: llama
+      spec:
+        ports:
+        - port: 11434
+          targetPort: 11434
+        selector:
+          app: llama
+        type: ClusterIP
+    - apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: vector-store
+      spec:
+        selector:
+          matchLabels:
+            app: vector-store
+        template:
+          metadata:
+            labels:
+              app: vector-store
+          spec:
+            containers:
+            - image: redis/redis-stack-server
+              name: workload
+    - apiVersion: v1
+      kind: Service
+      metadata:
+        name: vector-store
+      spec:
+        ports:
+        - port: 6379
+          targetPort: 6379
+        selector:
+          app: vector-store
+        type: ClusterIP
+  title: Spring AI Introduction
+  workshop:
+    files:
+    - git:
+        ref: origin/main
+        url: https://github.com/nevenc/spring-ai-workshop
+      includePaths:
+      - /workshop/**
+      path: .
+    image: jdk21-environment:*

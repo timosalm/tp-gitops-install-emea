@@ -19,23 +19,16 @@ spec:
     overtime: 30m
     reserved: 0
   - capacity: 40
-    deadline: 8h
-    expires: 4h
-    name: tp-pe
-    orphaned: 1h
-    overtime: 30m
-    reserved: 0
-  - capacity: 40
     deadline: 3h
     expires: 2h
     name: spring-application-advisor
     orphaned: 1h
     overtime: 30m
-    reserved: 0
+    reserved: 1
   - capacity: 40
     deadline: 3h
     expires: 2h
-    name: spring-application-advisor-dev
+    name: spring-ai
     orphaned: 1h
     overtime: 30m
-    reserved: 0
+    reserved: 1
