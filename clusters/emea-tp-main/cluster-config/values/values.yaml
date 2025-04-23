@@ -28,7 +28,7 @@ aws:
 harbor: 
   url: https://harbor.main.emea.end2end.link
 educates:
-  version: 2.7.2
+  version: 3.2.2
 tp_k8s:
   org: 
     id: 77aee83b-308f-4c8e-b9c4-3f7a6f19ba75
