@@ -12,13 +12,6 @@ spec:
       workshop: true
   workshops:
   - capacity: 40
-    deadline: 8h
-    expires: 3h
-    name: tp-devx
-    orphaned: 1h
-    overtime: 30m
-    reserved: 0
-  - capacity: 40
     deadline: 3h
     expires: 2h
     name: spring-application-advisor
