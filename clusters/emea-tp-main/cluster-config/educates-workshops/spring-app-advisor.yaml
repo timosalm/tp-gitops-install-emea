@@ -12,7 +12,7 @@ spec:
   publish:
     image: "$(image_repository)/spring-application-advisor-files:$(workshop_version)"
   workshop:
-    image: "ghcr.io/timosalm/spring-application-advisor-workshop/workshop-image:main"
+    image: "ghcr.io/tanzu-team/spring-application-advisor-educates-workshop/workshop-image:main"
     files:
     - git:
         url: https://github.com/timosalm/spring-application-advisor-workshop
